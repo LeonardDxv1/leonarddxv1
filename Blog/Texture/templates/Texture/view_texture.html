@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }} : {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+            <div class="card mb-3" style="width: 1300px">
+                <div class="card-header">
+                    Категория: <a href="{{ texture_item.category.get_absolute_url }}">{{ texture_item.category }}</a>
+<!--                    Категория: {{ item.category }}-->
+                </div>
+
+                    <div class="card-body">
+                        {% if texture_item.photo %}
+                            <img src="{{ texture_item.photo.url }}" class="mr-3" width="350" alt="Photo">
+                        {% else %}
+                            <h6>Фото нет</h6>
+                        {% endif %}
+                    </div>
+
+                        <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary'%}">{{ texture_item.title }}</h5>
+                        {% autoescape off %}
+                        <p class="card-text">{{ texture_item.content|linebreaks }}</p>
+                        {% endautoescape %}
+
+                        <a href="{{ texture_item.external_link }}" class="btn btn-primary" target="_blank" {% if not item.external_link %}style="display:none"{% endif %}>Скачать текстуры</a>
+                    </div>
+
+                <div class="card-footer text-body-secondary">
+                <div class="card-footer text-muted">
+                    {{ texture_item.created_at|date:'Y-m-d H:i' }}
+                </div>
+                </div>
+
+
+{% endblock %}
+

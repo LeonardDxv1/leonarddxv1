@@ -1,0 +1,40 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+
+  <nav class="navbar bg-body-tertiary">
+<div class="container-fluid">
+  <a class="navbar-brand" href="https://www.youtube.com/@Imperator_XV" target="_blank">
+    <img src="{% static 'images/logo1.jpg' %}" alt="Logo" width="35" height="35" class="d-inline-block align-text-top">
+    Imperator XV
+  </a>
+</div>
+</nav>
+
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Главная</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'texture' %}">Текстуры</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'world' %}">Миры</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_world' %}">Добавить мир</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_texture' %}">Добавить текстуры</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

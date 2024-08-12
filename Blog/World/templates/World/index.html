@@ -1,0 +1,46 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+    {{ title }} : {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar2.html' %}
+{% endblock %}
+
+{% block content %}
+
+            {% for item in worlds %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    Категория: <a href="{% url 'categoryworld' item.category.pk %}">{{ item.category }}</a>
+<!--                    Категория: {{ item.category }}-->
+                </div>
+                <div class="media" style="display:flex">
+                    <div class="media-photo">
+                        {% if item.photo %}
+                        <img src="{{ item.photo.url }}" class="mr-3" width="350" alt="Photo">
+                        {% else %}
+                        <h6>Фото нет</h6>
+                        {% endif %}
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        {% autoescape off %}
+                        <p class="card-text">{{ item.content|truncatewords:70|linebreaks }}</p>
+                        {% endautoescape %}
+                        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
+                        <a href="{{ item.external_link }}" class="btn btn-primary" target="_blank" {% if not item.external_link %}style="display:none"{% endif %}>Скачать мир</a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ item.created_at|date:'Y-m-d H:i' }}
+                </div>
+            </div>
+            {% endfor %}
+
+{% endblock %}
+
+
+
